@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Signal Trace</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: #f0f0f0;
+            margin: 20px;
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        #game-area {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        #signal-area {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .fragment {
+            background-color: #eee;
+            border: 1px solid #ccc;
+            padding: 8px 15px;
+            border-radius: 4px;
+            cursor: grab;
+            font-size: 16px;
+        }
+
+        .fragment.dragging {
+            opacity: 0.5;
+        }
+
+        #reassembled-area {
+            background-color: #f9f9f9;
+            border: 1px dashed #bbb;
+            padding: 8px;
+            border-radius: 4px;
+            min-width: 200px;
+            text-align: center;
+            font-size: 18px;
+            margin-bottom: 15px;
+        }
+
+        .drop-target {
+            min-width: 30px;
+            min-height: 30px;
+            border: 1px dotted #aaa;
+            margin-left: 5px;
+            margin-right: 5px;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #message-area {
+            margin-top: 15px;
+            font-weight: bold;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            border-radius: 4px;
+            background-color: #007bff;
+            color: white;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <h1>Signal Trace</h1>
+    <div id="game-area">
+        <div id="signal-area">
+            </div>
+        <div id="reassembled-area">
+            </div>
+        <div id="message-area"></div>
+        <p>Level: <span id="level-number">1</span> / 10</p>
+        <p>Score: <span id="score">0</span></p>
+        <button onclick="startGame()">Start Game</button>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
