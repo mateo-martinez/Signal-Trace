@@ -27,13 +27,18 @@
             align-items: center;
         }
 
-        #signal-area {
-            display: flex;
-            gap: 10px;
+        #challenge-area {
             margin-bottom: 20px;
+            text-align: center;
         }
 
-        .fragment {
+        #scrambled-elements {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .draggable {
             background-color: #eee;
             border: 1px solid #ccc;
             padding: 8px 15px;
@@ -42,35 +47,43 @@
             font-size: 16px;
         }
 
-        .fragment.dragging {
+        .draggable.dragging {
             opacity: 0.5;
         }
 
-        #reassembled-area {
-            background-color: #f9f9f9;
-            border: 1px dashed #bbb;
-            padding: 8px;
-            border-radius: 4px;
-            min-width: 200px;
-            text-align: center;
-            font-size: 18px;
+        #reassembly-area {
+            display: flex;
+            gap: 10px;
             margin-bottom: 15px;
         }
 
-        .drop-target {
+        .drop-slot {
             min-width: 30px;
             min-height: 30px;
             border: 1px dotted #aaa;
             margin-left: 5px;
             margin-right: 5px;
-            display: inline-flex;
+            display: flex;
             justify-content: center;
             align-items: center;
+            font-size: 16px;
         }
 
         #message-area {
             margin-top: 15px;
             font-weight: bold;
+            text-align: center;
+        }
+
+        #tips-area {
+            margin-top: 15px;
+            text-align: center;
+            font-size: 14px;
+            color: #777;
+        }
+
+        .tip {
+            margin-bottom: 5px;
         }
 
         button {
@@ -87,19 +100,49 @@
         button:hover {
             background-color: #0056b3;
         }
+
+        #info-help {
+            margin-top: 20px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            background-color: #f9f9f9;
+            text-align: left;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        #info-help h3 {
+            margin-top: 0;
+            color: #555;
+        }
     </style>
 </head>
 <body>
     <h1>Signal Trace</h1>
     <div id="game-area">
-        <div id="signal-area">
+        <div id="challenge-area">
+            <h2 id="challenge-title"></h2>
+            <p id="challenge-description"></p>
+        </div>
+        <div id="scrambled-elements">
             </div>
-        <div id="reassembled-area">
+        <div id="reassembly-area">
             </div>
         <div id="message-area"></div>
+        <div id="tips-area">
+            <h3>Tips:</h3>
+            <p id="tip-1" class="tip"></p>
+            <p id="tip-2" class="tip"></p>
+            <p id="tip-3" class="tip"></p>
+        </div>
         <p>Level: <span id="level-number">1</span> / 10</p>
         <p>Score: <span id="score">0</span></p>
         <button onclick="startGame()">Start Game</button>
+        <div id="info-help">
+            <h3>Hacking Information:</h3>
+            <p id="info-text"></p>
+        </div>
     </div>
 
     <script src="script.js"></script>
