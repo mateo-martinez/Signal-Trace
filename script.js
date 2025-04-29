@@ -145,16 +145,19 @@ function loadLevel() {
     const scrambled = [...currentLevelData.scrambled].sort(() => Math.random() - 0.5);
     const correctLength = currentLevelData.correct.length;
 
-    draggableElements = scrambled.map(text => {
+    draggableElements = [];
+    for (const text of scrambled) {
         const element = document.createElement('div');
         element.classList.add('draggable');
         element.textContent = text;
         element.draggable = true;
         element.addEventListener('dragstart', dragStart);
         scrambledElementsArea.appendChild(element);
-        return { node: element, text: text };
-    });
+        draggableElements.push({ node: element, text: text });
+    }
 
+    dropSlots = [];
+    reassemblyArea.innerHTML = ''; // Clear previous drop slots
     for (let i = 0; i < correctLength; i++) {
         const slot = document.createElement('div');
         slot.classList.add('drop-slot');
@@ -213,5 +216,23 @@ function checkSolution() {
                 messageArea.textContent = `Game Over! Final Score: ${score}`;
             }
         }, 1500);
-    } else if (!dropSlots.some(slot => slot.occupiedBy === null && currentLevelData.correct[dropSlots.indexOf(slot)] !== '')) {
-        messageArea.textContent = "
+    } else if (!dropSlots.some(slot => slot.occupiedBy === null) && currentSolution.some((item, index) => item !== currentLevelData.correct[index])) {
+        messageArea.textContent = "Incorrect. Try again.";
+        setTimeout(() => messageArea.textContent = '', 1500);
+    }
+}
+
+function arraysAreEqual(arr1, arr2) {
+    if (arr1.length !== arr2.length) return false;
+    for (let i = 0; i < arr1.length; i++) {
+        if (arr1[i] !== arr2[i]) return false;
+    }
+    return true;
+}
+
+function updateScoreDisplay() {
+    scoreDisplay.textContent = score;
+}
+
+// Start the game when the page loads
+startGame();
